@@ -1,0 +1,10 @@
+/*
+
+!.gitignore
+!composer.json
+!composer.lock
+!phpunit-printer.yml
+!phpunit.xml.dist
+
+!src
+!tests
