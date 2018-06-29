@@ -12,10 +12,10 @@ class Hotel_Repository
     private $_api_hotel;
     private $_language;
 
-    public function __construct($username, $passowrd)
+    public function __construct($username, $password)
     {
         $this->_default_limit = 2000; // booking-com default if no rows-param is given
-        $this->_api_hotel = new API_Hotel($username, $passowrd);
+        $this->_api_hotel = new API_Hotel($username, $password);
     }
 
     public function get_hotels($options, $language)

@@ -12,10 +12,10 @@ abstract class API_Base
     protected $_password;
     protected $_default_options;
   
-    protected function __construct($username, $passowrd)
+    protected function __construct($username, $password)
     {
         $this->_username = $username;
-        $this->_password = $passowrd;
+        $this->_password = $password;
         $this->_api_base = 'https://distribution-xml.booking.com/2.0/json/';
     }
   

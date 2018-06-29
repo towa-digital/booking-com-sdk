@@ -4,9 +4,9 @@ namespace Towa\SDK\Bookingcom\Api;
 
 class API_Hotel extends API_Base
 {
-    public function __construct($username, $passowrd)
+    public function __construct($username, $password)
     {
-        parent::__construct($username, $passowrd);
+        parent::__construct($username, $password);
         $this->_init_default_options();
     }
   
