@@ -2,6 +2,7 @@
 
 namespace Towa\SDK\Bookingcom\Test;
 
+use Dotenv\Dotenv;
 use PHPUnit\Framework\TestCase;
 use Towa\SDK\Bookingcom\Repository\Hotel_Repository;
 use Towa\SDK\Bookingcom\Repository\City_Repository;
@@ -15,7 +16,10 @@ class HotelRepositoryTest extends TestCase
 
     public function setUp()
     {
-        $this->hotelRepo = new Hotel_Repository();
+        $dotenv = new Dotenv(\dirname(__DIR__, 1));
+        $dotenv->load();
+
+        $this->hotelRepo = new Hotel_Repository($_ENV['USERNAME'], $_ENV['PASSWORD']);
 
         parent::setUp();
     }

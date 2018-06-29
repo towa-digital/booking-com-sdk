@@ -4,10 +4,6 @@ namespace Towa\SDK\Bookingcom\Api;
 use Unirest;
 use Towa\SDK\Bookingcom\Api\Response\API_Response;
 use Towa\SDK\Bookingcom\Exceptions\API_Call_Exception;
-use Dotenv\Dotenv;
-
-$dotenv = new Dotenv(__DIR__. '/../../');
-$dotenv->load();
 
 abstract class API_Base
 {
@@ -16,10 +12,10 @@ abstract class API_Base
     protected $_password;
     protected $_default_options;
   
-    protected function __construct()
+    protected function __construct($username, $passowrd)
     {
-        $this->_username = $_ENV['USERNAME'];
-        $this->_password = $_ENV['PASSWORD'];
+        $this->_username = $username;
+        $this->_password = $passowrd;
         $this->_api_base = 'https://distribution-xml.booking.com/2.0/json/';
     }
   
