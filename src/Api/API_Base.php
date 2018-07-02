@@ -17,6 +17,7 @@ abstract class API_Base
         $this->_username = $username;
         $this->_password = $password;
         $this->_api_base = 'https://distribution-xml.booking.com/2.0/json/';
+        // var_dump($username);
     }
   
     protected function _do_request($endpoint, array $options = [])

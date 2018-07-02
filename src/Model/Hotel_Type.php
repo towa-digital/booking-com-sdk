@@ -23,4 +23,9 @@ class Hotel_Type extends Base
     {
         return $this->get_field('translations')->language;
     }
+    
+    public function raw_data()
+    {
+        return $this->_model;
+    }
 }
