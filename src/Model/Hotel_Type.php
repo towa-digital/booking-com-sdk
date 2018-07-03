@@ -21,9 +21,9 @@ class Hotel_Type extends Base
   
     public function language()
     {
-        return $this->get_field('translations')->language;
+        return $this->_model->language;
     }
-    
+
     public function raw_data()
     {
         return $this->_model;

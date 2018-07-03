@@ -65,9 +65,18 @@ class Hotel_Repository
                 'hotel_type_ids' => $hoteltype_id,
                 'languages' => $this->_language
             ]);
+            $obj = (array) [
+                (object)[
+                'name' =>$raw_types[0]->name,
+                'translation_name' => $raw_types[0]->translations[0]->name,
+                'language' => $raw_types[0]->translations[0]->language,
+                ]
+                ];
+            // dump($obj);
+            // die();
             return array_map(function ($data) {
                 return new Hotel_Type($data);
-            }, $raw_types);
+            }, $obj);
         }
     }
 }
