@@ -5,6 +5,7 @@ namespace Towa\SDK\Bookingcom\Repository;
 use Towa\SDK\Bookingcom\Api\API_Hotel;
 use Towa\SDK\Bookingcom\Model\Hotel as Model_Hotel;
 use Towa\SDK\Bookingcom\Model\Hotel_Type;
+use Towa\SDK\Bookingcom\Model\Facility_Type;
 
 class Hotel_Repository
 {
@@ -31,6 +32,7 @@ class Hotel_Repository
     {
         $hotel = new Model_Hotel($hotel_data);
         $hotel->add_hotel_types($this->_get_hotel_types($hotel->hoteltype_id()));
+        $hotel->add_facility_types($this->_get_facility_types($hotel->hotel_facility_id()));
         return $hotel;
     }
 
@@ -68,18 +70,36 @@ class Hotel_Repository
                 'hotel_type_ids' => $hoteltype_id,
                 'languages' => $this->_language
             ]);
+
             $obj = (array) [
-                (object)[
-                'name' =>$raw_types[0]->name,
-                'translation_name' => $raw_types[0]->translations[0]->name,
-                'language' => $raw_types[0]->translations[0]->language,
-                ]
-                ];
-            // dump($obj);
-            // die();
+                        (object)[
+                        'name' =>$raw_types[0]->name,
+                        'translation_name' => $raw_types[0]->translations[0]->name,
+                        'language' => $raw_types[0]->translations[0]->language,
+                          ]
+                        ];
+
             return array_map(function ($data) {
                 return new Hotel_Type($data);
             }, $obj);
         }
+    }
+
+    private function _get_facility_types()
+    {
+        $raw_types = $this->_api_hotel->get_hotel_facility([
+                'languages' => $this->_language
+            ]);
+        $obj = (array) [
+                        (object)[
+                        'name' =>$raw_types[0]->name,
+                        'translation_name' => $raw_types[0]->translations[0]->name,
+                        'language' => $raw_types[0]->translations[0]->language,
+                          ]
+                        ];
+
+        return array_map(function ($data) {
+            return new Facility_Type($data);
+        }, $obj);
     }
 }
