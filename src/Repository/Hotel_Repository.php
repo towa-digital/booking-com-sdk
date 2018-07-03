@@ -36,7 +36,6 @@ class Hotel_Repository
 
     private function _get_hotels($options, $endpoint)
     {
-        print_r($options);
         // first call
         $hotels = $this->_api_hotel->$endpoint($options);
         
