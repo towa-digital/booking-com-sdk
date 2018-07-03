@@ -14,14 +14,16 @@ class Hotel_Repository
 
     public function __construct($username, $password)
     {
-        $this->_default_limit = 2000; // booking-com default if no rows-param is given
+        $this->_default_limit = 1000; // booking-com default if no rows-param is given
         $this->_api_hotel = new API_Hotel($username, $password);
     }
 
     public function get_hotels($options, $language)
     {
         $this->_language = $language;
+        $options['language']=$this->_language ;
         $raw_hotels = $this->_get_hotels($options, 'get_hotels');
+
         return array_map([$this, 'build_hotel'], $raw_hotels);
     }
 
@@ -34,10 +36,12 @@ class Hotel_Repository
 
     private function _get_hotels($options, $endpoint)
     {
+        print_r($options);
         // first call
         $hotels = $this->_api_hotel->$endpoint($options);
+        
         $offset = $this->_default_limit;
-       
+
         if (!isset($opitons['rows'])) :
         // if this statement is true,
         // it means that there are more hotels then received with the given options

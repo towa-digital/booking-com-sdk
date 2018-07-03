@@ -18,7 +18,7 @@ class Request
     private static $verifyPeer = true;
     private static $verifyHost = true;
 
-    private static $auth = array (
+    private static $auth = array(
         'user' => '',
         'pass' => '',
         'method' => CURLAUTH_BASIC
@@ -29,7 +29,7 @@ class Request
         'tunnel' => false,
         'address' => false,
         'type' => CURLPROXY_HTTP,
-        'auth' => array (
+        'auth' => array(
             'user' => '',
             'pass' => '',
             'method' => CURLAUTH_BASIC
