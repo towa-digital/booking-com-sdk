@@ -19,6 +19,11 @@ class API_Hotel extends API_Base
     {
         return $this->_do_request('hotelTypes', $options);
     }
+
+    public function get_hotel_facility_types(array $options = [])
+    {
+        return $this->_do_request('hotelFacilityTypes', $options);
+    }
     
     private function _init_default_options()
     {

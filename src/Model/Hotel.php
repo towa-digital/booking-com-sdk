@@ -7,12 +7,10 @@ use Towa\SDK\Bookingcom\Enum\Description_Types;
 class Hotel extends Base
 {
     private $_hotel_types;
-    private $_facility_types;
     public function __construct($model_data)
     {
         parent::__construct($model_data);
         $this->_hotel_types = [];
-        $this->_facility_types = [];
     }
   
     public function id()

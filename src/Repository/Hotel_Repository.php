@@ -71,8 +71,8 @@ class Hotel_Repository
 
             $obj = (array) [
                         (object)[
-                        'name' =>$raw_types[0]->name,
-                        'translation_name' => $raw_types[0]->translations[0]->name,
+                        // 'name' =>$raw_types[0]->name,
+                        'name' => $raw_types[0]->translations[0]->name,
                         'language' => $raw_types[0]->translations[0]->language,
                           ]
                         ];
