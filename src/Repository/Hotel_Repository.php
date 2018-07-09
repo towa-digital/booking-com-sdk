@@ -27,6 +27,20 @@ class Hotel_Repository
         return array_map([$this, 'build_hotel'], $raw_hotels);
     }
 
+    public function get_changed_hotels($options)
+    {
+        return array_map([$this, 'build_hotel'], [$this->get_changed_hotels_raw($options)]);
+    }
+
+    public function get_changed_hotels_raw($options)
+    {
+        if (!isset($options['last_change'])) {
+            return false;
+        }
+         
+        return $this->_get_hotels($options, 'get_changed_hotels');
+    }
+
     public function build_hotel($hotel_data)
     {
         $hotel = new Model_Hotel($hotel_data);

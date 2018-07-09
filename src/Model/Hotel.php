@@ -192,4 +192,17 @@ class Hotel extends Base
     {
         return $this->get_field('hotel_data')->hotel_facilities;
     }
+    public function hotel_changed_id()
+    {
+        $array = [];
+        foreach ($this->get_field('changed_hotels') as $data) {
+            $changed_hotel = $data->hotel_id;
+            array_push($array, $changed_hotel);
+        }
+        return $array;
+    }
+    public function hotel_closed_id()
+    {
+        return $this->get_field('closed_hotels');
+    }
 }

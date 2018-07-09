@@ -25,7 +25,6 @@ abstract class API_Base
         $endpoint_url = $this->_build_enpoint_url($endpoint, $options);
         $request      = $this->_init_request();
         $response     = new API_Response($request::get($endpoint_url));
-
         if ($response->was_successful()) {
             return $response->body();
         } else {

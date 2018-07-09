@@ -5,6 +5,8 @@
 ### Fixed
 
 + username and password dependency (very quick and dirty fix, tbd)
++ Facility model and repo 
++ add Last changes endpoint
 
 ## [v0.0.1]
 
