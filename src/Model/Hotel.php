@@ -197,7 +197,8 @@ class Hotel extends Base
 
     public function facilities()
     {
-        return $this->get_field('hotel_data')->hotel_facilities;
+        return collect($this->get_field('hotel_data')->hotel_facilities)
+            ->mapInto(Hotel_Facility_Type::class);
     }
 
     public function hotel_changed_id()
