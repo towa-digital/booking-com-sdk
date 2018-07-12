@@ -73,10 +73,23 @@ class Hotel_Repository
         return $hotels;
     }
 
+    public function get_hotel_facility_types($options)
+    {
+        $raw_types = $this->api_hotel->get_hotel_facility_types($options);
+
+        return collect($raw_types)
+            ->map(function ($type) {
+                $type->translations = array_pop($type->translations);
+
+                return new Hotel_Facility_Type($type);
+            })
+            ->toArray();
+    }
+
     /**
      * A Hotel from booking.com has always one type.
      */
-    private function get_hotel_type($hotel)
+    public function get_hotel_type($hotel)
     {
         if (empty($hotel->type_id())) {
             return false;
@@ -94,18 +107,5 @@ class Hotel_Repository
                 return new Hotel_Type($type);
             })
             ->first();
-    }
-
-    private function get_hotel_facility_types($options)
-    {
-        $raw_types = $this->api_hotel->get_hotel_facility_types($options);
-
-        return collect($raw_types)
-            ->map(function ($type) {
-                $type->translations = array_pop($type->translations);
-
-                return new Hotel_Facility_Type($type);
-            })
-            ->toArray();
     }
 }
