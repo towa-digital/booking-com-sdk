@@ -81,12 +81,12 @@ class Hotel_Repository
 
         $raw_types = $this->_api_hotel->get_hotel_types([
             'hotel_type_ids' => $hoteltype_id,
-            'languages' => $this->_language,
+            'languages'      => $this->_language,
         ]);
 
         $language = $this->_language;
 
-        return array_map(function ($data) use ($language){
+        return array_map(function ($data) use ($language) {
             $data->translations = array_pop($data->translations);
 
             return new Hotel_Type($data);
