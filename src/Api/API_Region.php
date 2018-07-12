@@ -22,7 +22,7 @@ class API_Region extends API_Base
     private function _init_default_options()
     {
         $this->_default_options = [
-      'country'  => 'at',
+      'country' => 'at',
       'language' => 'de',
     ];
     }

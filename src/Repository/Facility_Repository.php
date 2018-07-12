@@ -21,9 +21,9 @@ class Facility_Repository
         foreach ($raw_types as $row) {
             $obj = (array) [
                 (object) [
-                'name'            => $row->name,
+                'name' => $row->name,
                 'translated_name' => $row->translations[0]->name,
-                'language'        => $row->translations[0]->language,
+                'language' => $row->translations[0]->language,
                   ],
                 ];
             array_push($array, $obj);

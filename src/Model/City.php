@@ -27,7 +27,7 @@ class City extends Base
     public function position()
     {
         return json_encode([
-        'latitude'  => $this->latitude(),
+        'latitude' => $this->latitude(),
         'longitude' => $this->longitude(),
         ]);
     }

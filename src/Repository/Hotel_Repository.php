@@ -81,7 +81,7 @@ class Hotel_Repository
 
         $raw_types = $this->_api_hotel->get_hotel_types([
             'hotel_type_ids' => $hoteltype_id,
-            'languages'      => $this->_language,
+            'languages' => $this->_language,
         ]);
 
         $language = $this->_language;
