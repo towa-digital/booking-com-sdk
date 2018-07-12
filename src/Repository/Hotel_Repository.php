@@ -95,4 +95,18 @@ class Hotel_Repository
             })
             ->first();
     }
+
+    
+    private function get_hotel_facility_types($options)
+    {
+        $raw_types = $this->api_hotel->get_hotel_facility_types($options);
+
+        return collect($raw_types)
+            ->map(function ($type) {
+                $type->translations = array_pop($type->translations);
+
+                return new Hotel_Facility_Type($type);
+            })
+            ->toArray();
+    }
 }

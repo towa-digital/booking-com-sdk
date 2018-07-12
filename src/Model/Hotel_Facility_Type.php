@@ -14,6 +14,11 @@ class Hotel_Facility_Type extends Base
         return $this->get_field('hotel_facility_type_id');
     }
 
+    public function type_id()
+    {
+        return $this->get_field('facility_type_id');
+    }
+
     public function name()
     {
         return $this->_model->translations->name;
@@ -24,7 +29,7 @@ class Hotel_Facility_Type extends Base
         return $this->_model->translations->language;
     }
 
-    public function type()
+    public function value_type()
     {
         return $this->get_field('type');
     }
