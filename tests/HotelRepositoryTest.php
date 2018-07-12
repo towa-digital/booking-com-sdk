@@ -4,11 +4,9 @@ namespace Towa\SDK\Bookingcom\Test;
 
 use Dotenv\Dotenv;
 use PHPUnit\Framework\TestCase;
-use Towa\SDK\Bookingcom\Repository\Hotel_Repository;
-use Towa\SDK\Bookingcom\Repository\City_Repository;
-use Towa\SDK\Bookingcom\Repository\Facility_Repository;
 use Towa\SDK\Bookingcom\Model\Hotel;
-use Towa\SDK\Bookingcom\Model\Hotel_Type;
+use Towa\SDK\Bookingcom\Repository\Facility_Repository;
+use Towa\SDK\Bookingcom\Repository\Hotel_Repository;
 
 class HotelRepositoryTest extends TestCase
 {
@@ -48,11 +46,11 @@ class HotelRepositoryTest extends TestCase
         $hotels = $this->hotelRepo->get_hotels(
             [
                 'hotel_ids' => 28546,
-                'extras' => 'hotel_info,hotel_description,hotel_facilities,hotel_photos,room_info',
+                'extras'    => 'hotel_info,hotel_description,hotel_facilities,hotel_photos,room_info',
             ],
             'en'
         );
-      
+
         $hotel = $hotels;
 
         $this->assertNotEmpty($hotel);
@@ -68,7 +66,7 @@ class HotelRepositoryTest extends TestCase
             ],
             'en'
         );
-      
+
         $hotel = $hotels;
         $this->assertNotEmpty($hotel);
         $this->assertCount(1, [$hotels]);
@@ -98,23 +96,22 @@ class HotelRepositoryTest extends TestCase
                 ],
                 'en'
             );
-          
+
         $hotel = $hotels;
         $this->assertNotEmpty($hotel);
         $this->assertCount(1, [$hotels]);
         // $this->assertInstanceOf(Hotel::class, $hotels);
     }
 
-
     /** @test */
     public function it_can_get_changed_hotels()
     {
         $hotels = $this->hotelRepo->get_changed_hotels(
                  [
-                    'last_change'=>'2018-07-09 00:00:00',
+                    'last_change'=> '2018-07-09 00:00:00',
                 ]
              );
-           
+
         $hotel = $hotels[0]->hotel_changed_id();
         $this->assertNotEmpty($hotel);
         $this->assertCount(1, [$hotels]);
@@ -126,20 +123,20 @@ class HotelRepositoryTest extends TestCase
     {
         $hotels = $this->hotelRepo->get_changed_hotels(
                   [
-                     'last_change'=>'2018-07-09 00:00:00',
+                     'last_change'=> '2018-07-09 00:00:00',
                  ]
               );
-            
+
         $hotel = $hotels[0]->hotel_closed_id();
         $this->assertNotEmpty($hotel);
         $this->assertCount(1, [$hotels]);
     }
-    
+
     /** @test */
     public function it_can_get_facility_types()
     {
         $facilities = $this->facilityRepo->get_facility_types([]);
-            
+
         $facility = $facilities;
         $this->assertNotEmpty($facility);
     }

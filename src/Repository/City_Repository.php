@@ -8,11 +8,12 @@ use Towa\SDK\Bookingcom\Model\City;
 class City_Repository
 {
     private $_api_city;
+
     public function __construct($username, $password)
     {
         $this->_api_city = new API_City($username, $password);
     }
-  
+
     public function get_cities($options)
     {
         return array_map(function ($city_data) {

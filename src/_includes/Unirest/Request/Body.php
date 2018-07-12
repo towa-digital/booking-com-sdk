@@ -2,16 +2,18 @@
 
 namespace Unirest\Request;
 
-use Unirest\Request as Request;
 use Unirest\Exception as Exception;
+use Unirest\Request as Request;
 
 class Body
 {
     /**
      * Prepares a file for upload. To be used inside the parameters declaration for a request.
+     *
      * @param string $filename The file path
      * @param string $mimetype MIME type
      * @param string $postname the file name
+     *
      * @return string|\CURLFile
      */
     public static function File($filename, $mimetype = '', $postname = '')
@@ -52,12 +54,12 @@ class Body
         }
 
         if (!is_array($data)) {
-            return array($data);
+            return [$data];
         }
 
         if ($files !== false) {
             foreach ($files as $name => $file) {
-                $data[$name] = call_user_func(array(__CLASS__, 'File'), $file);
+                $data[$name] = call_user_func([__CLASS__, 'File'], $file);
             }
         }
 

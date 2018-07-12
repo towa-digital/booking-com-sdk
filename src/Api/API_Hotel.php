@@ -9,7 +9,7 @@ class API_Hotel extends API_Base
         parent::__construct($username, $password);
         $this->_init_default_options();
     }
-  
+
     public function get_hotels(array $options = [])
     {
         return $this->_do_request('hotels', $options);
@@ -29,7 +29,7 @@ class API_Hotel extends API_Base
     {
         return $this->_do_request('changedHotels', $options);
     }
-    
+
     private function _init_default_options()
     {
         $this->_default_options = [];

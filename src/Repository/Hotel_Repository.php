@@ -21,7 +21,7 @@ class Hotel_Repository
     public function get_hotels($options, $language)
     {
         $this->_language = $language;
-        $options['language']=$this->_language ;
+        $options['language'] = $this->_language;
         $raw_hotels = $this->_get_hotels($options, 'get_hotels');
 
         return array_map([$this, 'build_hotel'], $raw_hotels);
@@ -37,7 +37,7 @@ class Hotel_Repository
         if (!isset($options['last_change'])) {
             return false;
         }
-         
+
         return $this->_get_hotels($options, 'get_changed_hotels');
     }
 
@@ -45,6 +45,7 @@ class Hotel_Repository
     {
         $hotel = new Model_Hotel($hotel_data);
         $hotel->add_hotel_types($this->_get_hotel_types($hotel->hoteltype_id()));
+
         return $hotel;
     }
 
@@ -52,14 +53,14 @@ class Hotel_Repository
     {
         // first call
         $hotels = $this->_api_hotel->$endpoint($options);
-        
+
         $offset = $this->_default_limit;
 
         if (!isset($opitons['rows'])) :
         // if this statement is true,
         // it means that there are more hotels then received with the given options
         // so make further call with the offset
-        while (is_array($hotels) && sizeof($hotels) >= $offset) :
+        while (is_array($hotels) && count($hotels) >= $offset) :
         $options['offset'] = $offset;
         $hotels_by_offset = $this->_api_hotel->$endpoint($options);
 
@@ -80,15 +81,15 @@ class Hotel_Repository
         } else {
             $raw_types = $this->_api_hotel->get_hotel_types([
                 'hotel_type_ids' => $hoteltype_id,
-                'languages' => $this->_language
+                'languages'      => $this->_language,
             ]);
 
             $obj = (array) [
-                        (object)[
+                        (object) [
                         // 'name' =>$raw_types[0]->name,
-                        'name' => $raw_types[0]->translations[0]->name,
+                        'name'     => $raw_types[0]->translations[0]->name,
                         'language' => $raw_types[0]->translations[0]->language,
-                          ]
+                          ],
                         ];
 
             return array_map(function ($data) {

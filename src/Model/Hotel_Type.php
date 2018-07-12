@@ -13,12 +13,12 @@ class Hotel_Type extends Base
     {
         return $this->get_field('hotel_type_id');
     }
-  
+
     public function name()
     {
         return $this->get_field('name');
     }
-  
+
     public function language()
     {
         return $this->_model->language;
