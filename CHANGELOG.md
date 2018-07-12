@@ -5,6 +5,7 @@
 ### Added
 
 + collections
++ welcome message
 
 ### Fixed
 

@@ -168,7 +168,7 @@ class Hotel extends Base
 
     public function welcome_message()
     {
-        return $this->get_field('hotel_data')->hotelier_welcome_message;
+        return $this->get_field('hotel_data')->hotelier_welcome_message ?? '';
     }
 
     public function hotel_description()
