@@ -96,7 +96,6 @@ class Hotel_Repository
             ->first();
     }
 
-    
     private function get_hotel_facility_types($options)
     {
         $raw_types = $this->api_hotel->get_hotel_facility_types($options);
