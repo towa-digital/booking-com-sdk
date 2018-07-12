@@ -1,27 +1,34 @@
 {
     "name": "towa/booking-com-sdk",
     "description": "Booking.com SDK",
-    "authors": [{
-      "name": "YosefMoustafa",
-      "email": "yosef.moustafa@towa.at"
-    }],
+    "type": "library",
+    "authors": [
+        {
+            "name": "SahinU88",
+            "email": "sahin.ucar@towa.at"
+          },
+          {
+            "name": "yosefMoustafa",
+            "email": "yosef.moustafa@towa.at"
+          }
+    ],
     "require": {
         "guzzlehttp/guzzle": "^6.3",
         "vlucas/phpdotenv": "^2.4",
         "tightenco/collect": "^5.6"
     },
-    "repositories":[],
+    "repositories": [],
     "require-dev": {
-      "symfony/var-dumper": "@stable",
+        "symfony/var-dumper": "@stable",
         "phpunit/phpunit": "^7.2",
         "codedungeon/phpunit-result-printer": "^0.19.10",
         "nunomaduro/collision": "^2.0"
     },
     "autoload": {
-      "psr-4": {
-        "Towa\\SDK\\Bookingcom\\": "src/",
-        "Unirest\\" : "src/_includes/Unirest/"
-      }
+        "psr-4": {
+            "Towa\\SDK\\Bookingcom\\": "src/",
+            "Unirest\\": "src/_includes/Unirest/"
+        }
     },
     "autoload-dev": {
         "psr-4": {
@@ -31,5 +38,4 @@
     "scripts": {
         "test": "vendor/bin/phpunit"
     }
-
-  }
+}

@@ -20,7 +20,7 @@ Please see the [Changelog](CHANGELOG.md) for more information.
 $ composer test
 ```
 
-### Requirements:
+### Requirements
 
 + `.env`-file in the root with a valid credentials
   + `USERNAME`
@@ -37,6 +37,6 @@ Towa is a digital agency based in Bregenz (Austria), Vienna (Austria) & St. Gall
 
 ## License
 
-The MIT License (MIT). Please read the (LICENSE.md)[License File] for more information.
+The MIT License (MIT). Please read the [License File](LICENSE.md) for more information.
 
 [current_version]: https://github.com/towa-digital/booking-com-sdk/releases/tag/v0.0.2
