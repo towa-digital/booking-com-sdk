@@ -6,6 +6,7 @@
 
 + collections
 + welcome message
++ hotel-main-photo-method
 
 ### Fixed
 

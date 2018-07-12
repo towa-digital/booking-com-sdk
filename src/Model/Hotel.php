@@ -186,6 +186,15 @@ class Hotel extends Base
         return $this->get_field('hotel_data')->hotel_photos;
     }
 
+    public function main_photo()
+    {
+        return collect($this->photos())
+            ->filter(function($photo){
+                return isset($photo->main_photo) && $photo->main_photo === true;
+            })
+            ->first();
+    }
+
     public function facilities()
     {
         return $this->get_field('hotel_data')->hotel_facilities;
