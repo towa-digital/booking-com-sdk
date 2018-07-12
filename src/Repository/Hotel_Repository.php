@@ -74,7 +74,7 @@ class Hotel_Repository
     }
 
     /**
-     * A Hotel from booking.com has always one type
+     * A Hotel from booking.com has always one type.
      */
     private function get_hotel_type($hotel)
     {
@@ -88,7 +88,7 @@ class Hotel_Repository
         ]);
 
         return collect($raw_types)
-            ->map(function($type){
+            ->map(function ($type) {
                 $type->translations = array_pop($type->translations);
 
                 return new Hotel_Type($type);
