@@ -19,19 +19,19 @@ class Request
     private static $verifyHost = true;
 
     private static $auth = [
-        'user'   => '',
-        'pass'   => '',
+        'user' => '',
+        'pass' => '',
         'method' => CURLAUTH_BASIC,
     ];
 
     private static $proxy = [
-        'port'    => false,
-        'tunnel'  => false,
+        'port' => false,
+        'tunnel' => false,
         'address' => false,
-        'type'    => CURLPROXY_HTTP,
-        'auth'    => [
-            'user'   => '',
-            'pass'   => '',
+        'type' => CURLPROXY_HTTP,
+        'auth' => [
+            'user' => '',
+            'pass' => '',
             'method' => CURLAUTH_BASIC,
         ],
     ];
@@ -443,12 +443,12 @@ class Request
         }
 
         $curl_base_options = [
-            CURLOPT_URL            => self::encodeUrl($url),
+            CURLOPT_URL => self::encodeUrl($url),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_MAXREDIRS      => 10,
-            CURLOPT_HTTPHEADER     => self::getFormattedHeaders($headers),
-            CURLOPT_HEADER         => true,
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_HTTPHEADER => self::getFormattedHeaders($headers),
+            CURLOPT_HEADER => true,
             CURLOPT_SSL_VERIFYPEER => self::$verifyPeer,
             //CURLOPT_SSL_VERIFYHOST accepts only 0 (false) or 2 (true). Future versions of libcurl will treat values 1 and 2 as equals
             CURLOPT_SSL_VERIFYHOST => self::$verifyHost === false ? 0 : 2,
@@ -475,25 +475,25 @@ class Request
         if (!empty($username)) {
             curl_setopt_array(self::$handle, [
                 CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
-                CURLOPT_USERPWD  => $username.':'.$password,
+                CURLOPT_USERPWD => $username.':'.$password,
             ]);
         }
 
         if (!empty(self::$auth['user'])) {
             curl_setopt_array(self::$handle, [
-                CURLOPT_HTTPAUTH    => self::$auth['method'],
-                CURLOPT_USERPWD     => self::$auth['user'].':'.self::$auth['pass'],
+                CURLOPT_HTTPAUTH => self::$auth['method'],
+                CURLOPT_USERPWD => self::$auth['user'].':'.self::$auth['pass'],
             ]);
         }
 
         if (self::$proxy['address'] !== false) {
             curl_setopt_array(self::$handle, [
-                CURLOPT_PROXYTYPE       => self::$proxy['type'],
-                CURLOPT_PROXY           => self::$proxy['address'],
-                CURLOPT_PROXYPORT       => self::$proxy['port'],
+                CURLOPT_PROXYTYPE => self::$proxy['type'],
+                CURLOPT_PROXY => self::$proxy['address'],
+                CURLOPT_PROXYPORT => self::$proxy['port'],
                 CURLOPT_HTTPPROXYTUNNEL => self::$proxy['tunnel'],
-                CURLOPT_PROXYAUTH       => self::$proxy['auth']['method'],
-                CURLOPT_PROXYUSERPWD    => self::$proxy['auth']['user'].':'.self::$proxy['auth']['pass'],
+                CURLOPT_PROXYAUTH => self::$proxy['auth']['method'],
+                CURLOPT_PROXYUSERPWD => self::$proxy['auth']['user'].':'.self::$proxy['auth']['pass'],
             ]);
         }
 

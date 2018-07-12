@@ -47,7 +47,7 @@ class HotelRepositoryTest extends TestCase
         $hotels = $this->hotelRepo->get_hotels(
             [
                 'hotel_ids' => 28546,
-                'extras'    => 'hotel_info,hotel_description,hotel_facilities,hotel_photos,room_info',
+                'extras' => 'hotel_info,hotel_description,hotel_facilities,hotel_photos,room_info',
             ],
             'en'
         );
@@ -109,7 +109,7 @@ class HotelRepositoryTest extends TestCase
     {
         $hotels = $this->hotelRepo->get_changed_hotels(
                  [
-                    'last_change'=> '2018-07-09 00:00:00',
+                    'last_change' => '2018-07-09 00:00:00',
                 ]
              );
 
@@ -124,7 +124,7 @@ class HotelRepositoryTest extends TestCase
     {
         $hotels = $this->hotelRepo->get_changed_hotels(
                   [
-                     'last_change'=> '2018-07-09 00:00:00',
+                     'last_change' => '2018-07-09 00:00:00',
                  ]
               );
 
