@@ -189,7 +189,7 @@ class Hotel extends Base
     public function main_photo()
     {
         return collect($this->photos())
-            ->filter(function($photo){
+            ->filter(function ($photo) {
                 return isset($photo->main_photo) && $photo->main_photo === true;
             })
             ->first();
