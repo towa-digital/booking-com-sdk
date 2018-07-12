@@ -44,8 +44,7 @@ class Hotel_Repository
     public function build_hotel($hotel_data)
     {
         $hotel = new Model_Hotel($hotel_data);
-        $hotel->add_hotel_type($this->get_hotel_type($hotel));
-        $hotel->add_facility_types($this->get_hotel_facility_types($hotel));
+        $hotel->set_type($this->get_hotel_type($hotel));
 
         return $hotel;
     }
@@ -79,12 +78,12 @@ class Hotel_Repository
      */
     private function get_hotel_type($hotel)
     {
-        if (empty($hotel->hoteltype_id())) {
+        if (empty($hotel->type_id())) {
             return false;
         }
 
         $raw_types = $this->api_hotel->get_hotel_types([
-            'hotel_type_ids' => $hotel->hoteltype_id(),
+            'hotel_type_ids' => $hotel->type_id(),
             'languages' => $this->langauge,
         ]);
 
@@ -95,25 +94,5 @@ class Hotel_Repository
                 return new Hotel_Type($type);
             })
             ->first();
-    }
-
-    private function get_hotel_facility_types()
-    {
-        if (empty($hoteltype_id)) {
-            return false;
-        }
-
-        $raw_types = $this->api_hotel->get_hotel_types([
-            'hotel_type_ids' => $hoteltype_id,
-            'languages' => $this->langauge,
-        ]);
-
-        return collect($raw_types)
-            ->map(function($type){
-                $type->translations = array_pop($type->translations);
-
-                return new Hotel_Type($type);
-            })
-            ->toArray();
     }
 }

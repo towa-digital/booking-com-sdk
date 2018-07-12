@@ -4,7 +4,7 @@ namespace Towa\SDK\Bookingcom\Model;
 
 class Hotel extends Base
 {
-    private $hotel_type;
+    private $type;
 
     public function __construct($model_data)
     {
@@ -16,19 +16,19 @@ class Hotel extends Base
         return $this->get_field('hotel_id');
     }
 
-    public function hoteltype_id()
+    public function type_id()
     {
         return $this->get_field('hotel_data')->hotel_type_id;
     }
 
-    public function add_hotel_type($hotel_types)
+    public function set_type($type)
     {
-        $this->hotel_type = $hotel_types;
+        $this->type = $type;
     }
 
-    public function hotel_type()
+    public function type()
     {
-        return $this->hotel_type;
+        return $this->type;
     }
 
     public function name()
@@ -81,7 +81,7 @@ class Hotel extends Base
         return $this->get_field('hotel_data')->creditcard_required;
     }
 
-    public function hotel_class()
+    public function class()
     {
         return $this->get_field('hotel_data')->class;
     }
@@ -181,12 +181,12 @@ class Hotel extends Base
         return $this->get_field('hotel_data')->hotel_important_information;
     }
 
-    public function hotel_photo()
+    public function photos()
     {
         return $this->get_field('hotel_data')->hotel_photos;
     }
 
-    public function hotel_facilities()
+    public function facilities()
     {
         return $this->get_field('hotel_data')->hotel_facilities;
     }
