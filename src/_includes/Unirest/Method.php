@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Hypertext Transfer Protocol (HTTP) Method Registry
+ * Hypertext Transfer Protocol (HTTP) Method Registry.
  *
  * http://www.iana.org/assignments/http-methods/http-methods.xhtml
  */

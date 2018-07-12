@@ -13,7 +13,7 @@ class Facility_Type extends Base
     {
         return $this->get_field('facility_type_id');
     }
-  
+
     public function name()
     {
         return $this->_model->language;
