@@ -7,7 +7,8 @@
     }],
     "require": {
         "guzzlehttp/guzzle": "^6.3",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "tightenco/collect": "^5.6"
     },
     "repositories":[],
     "require-dev": {

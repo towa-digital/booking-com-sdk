@@ -1,5 +1,20 @@
 # Changelog
 
+## [unreleased]
+
+### Added
+
++ collections
+
+### Fixed
+
++ min/max price
+
+### Updated
+
++ `Facility_Type` Model
++ `Hotel_Repository` Class
+
 ## [v0.0.2]
 
 ### Fixed

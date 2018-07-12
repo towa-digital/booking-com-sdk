@@ -4,12 +4,11 @@ namespace Towa\SDK\Bookingcom\Model;
 
 class Hotel extends Base
 {
-    private $_hotel_types;
+    private $hotel_type;
 
     public function __construct($model_data)
     {
         parent::__construct($model_data);
-        $this->_hotel_types = [];
     }
 
     public function id()
@@ -19,21 +18,17 @@ class Hotel extends Base
 
     public function hoteltype_id()
     {
-        if (!empty($this->get_field('hotel_data')->hotel_type_id)) {
-            return $this->get_field('hotel_data')->hotel_type_id;
-        } else {
-            return [];
-        }
+        return $this->get_field('hotel_data')->hotel_type_id;
     }
 
-    public function add_hotel_types($hotel_types)
+    public function add_hotel_type($hotel_types)
     {
-        $this->_hotel_types = $hotel_types;
+        $this->hotel_type = $hotel_types;
     }
 
-    public function hotel_types()
+    public function hotel_type()
     {
-        return $this->_hotel_types;
+        return $this->hotel_type;
     }
 
     public function name()
@@ -93,24 +88,20 @@ class Hotel extends Base
 
     public function minrate()
     {
-        $array = [];
-        foreach ($this->get_field('room_data') as $data) {
-            $price = $data->room_info->min_price;
-            array_push($array, $price);
-        }
+        $prices = collect($this->get_field('room_data'))
+            ->pluck('room_info.min_price')
+            ->filter();
 
-        return min($array);
+        return $prices->isNotEmpty() ? $prices->max() : 0;
     }
 
     public function maxrate()
     {
-        $array = [];
-        foreach ($this->get_field('room_data') as $data) {
-            $price = $data->room_info->max_price;
-            array_push($array, $price);
-        }
+        $prices = collect($this->get_field('room_data'))
+            ->pluck('room_info.max_price')
+            ->filter();
 
-        return max($array);
+        return $prices->isNotEmpty() ? $prices->max() : 0;
     }
 
     public function url()
@@ -202,13 +193,9 @@ class Hotel extends Base
 
     public function hotel_changed_id()
     {
-        $array = [];
-        foreach ($this->get_field('changed_hotels') as $data) {
-            $changed_hotel = $data->hotel_id;
-            array_push($array, $changed_hotel);
-        }
-
-        return $array;
+        return collect($this->get_field('changed_hotels'))
+            ->pluck('hotel_id')
+            ->to_array();
     }
 
     public function hotel_closed_id()

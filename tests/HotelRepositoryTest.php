@@ -5,7 +5,6 @@ namespace Towa\SDK\Bookingcom\Test;
 use Dotenv\Dotenv;
 use PHPUnit\Framework\TestCase;
 use Towa\SDK\Bookingcom\Model\Hotel;
-use Towa\SDK\Bookingcom\Repository\Facility_Repository;
 use Towa\SDK\Bookingcom\Repository\Hotel_Repository;
 
 class HotelRepositoryTest extends TestCase
@@ -13,16 +12,12 @@ class HotelRepositoryTest extends TestCase
     /** @var \Towa\SDK\Bookingcom\Repository\Hotel_Repository */
     protected $hotelRepo;
 
-    /** @var \Towa\SDK\Bookingcom\Repository\Facility_Repository */
-    protected $facilityRepo;
-
     public function setUp()
     {
         $dotenv = new Dotenv(\dirname(__DIR__, 1));
         $dotenv->load();
 
         $this->hotelRepo = new Hotel_Repository($_ENV['USERNAME'], $_ENV['PASSWORD']);
-        $this->facilityRepo = new Facility_Repository($_ENV['USERNAME'], $_ENV['PASSWORD']);
 
         parent::setUp();
     }
@@ -52,10 +47,10 @@ class HotelRepositoryTest extends TestCase
             'en'
         );
 
-        $hotel = $hotels;
+        $hotel = $hotels[0];
 
-        $this->assertNotEmpty($hotel);
-        $this->assertCount(1, [$hotels]);
+        $this->assertCount(1, $hotels);
+        $this->assertEquals(28546, $hotel->id());
     }
 
     /** @test */
@@ -131,13 +126,5 @@ class HotelRepositoryTest extends TestCase
         $hotel = $hotels[0]->hotel_closed_id();
         $this->assertNotEmpty($hotel);
         $this->assertCount(1, [$hotels]);
-    }
-
-    /** @test */
-    public function it_can_get_facility_types()
-    {
-        $facilities = $this->facilityRepo->get_facility_types([]);
-
-        $this->assertNotEmpty($facilities);
     }
 }

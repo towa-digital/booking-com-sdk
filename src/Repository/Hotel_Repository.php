@@ -8,20 +8,20 @@ use Towa\SDK\Bookingcom\Model\Hotel_Type;
 
 class Hotel_Repository
 {
-    private $_default_limit;
-    private $_api_hotel;
-    private $_language;
+    private $default_limit;
+    private $api_hotel;
+    private $langauge;
 
     public function __construct($username, $password)
     {
-        $this->_default_limit = 1000; // booking-com default if no rows-param is given
-        $this->_api_hotel = new API_Hotel($username, $password);
+        $this->default_limit = 1000; // booking-com default if no rows-param is given
+        $this->api_hotel = new API_Hotel($username, $password);
     }
 
     public function get_hotels($options, $language)
     {
-        $this->_language = $language;
-        $options['language'] = $this->_language;
+        $this->langauge = $language;
+        $options['language'] = $this->langauge;
         $raw_hotels = $this->_get_hotels($options, 'get_hotels');
 
         return array_map([$this, 'build_hotel'], $raw_hotels);
@@ -44,7 +44,8 @@ class Hotel_Repository
     public function build_hotel($hotel_data)
     {
         $hotel = new Model_Hotel($hotel_data);
-        $hotel->add_hotel_types($this->_get_hotel_types($hotel->hoteltype_id()));
+        $hotel->add_hotel_type($this->get_hotel_type($hotel));
+        $hotel->add_facility_types($this->get_hotel_facility_types($hotel));
 
         return $hotel;
     }
@@ -52,8 +53,8 @@ class Hotel_Repository
     private function _get_hotels($options, $endpoint)
     {
         // first call
-        $hotels = $this->_api_hotel->$endpoint($options);
-        $offset = $this->_default_limit;
+        $hotels = $this->api_hotel->$endpoint($options);
+        $offset = $this->default_limit;
 
         if (!isset($opitons['rows'])) {
             // if this statement is true,
@@ -61,11 +62,11 @@ class Hotel_Repository
             // so make further call with the offset
             while (is_array($hotels) && count($hotels) >= $offset) {
                 $options['offset'] = $offset;
-                $hotels_by_offset = $this->_api_hotel->$endpoint($options);
+                $hotels_by_offset = $this->api_hotel->$endpoint($options);
 
                 if (is_array($hotels_by_offset)) {
                     $hotels = array_merge($hotels, $hotels_by_offset);
-                    $offset += $this->_default_limit;
+                    $offset += $this->default_limit;
                 }
             }
         }
@@ -73,23 +74,46 @@ class Hotel_Repository
         return $hotels;
     }
 
-    private function _get_hotel_types($hoteltype_id)
+    /**
+     * A Hotel from booking.com has always one type
+     */
+    private function get_hotel_type($hotel)
+    {
+        if (empty($hotel->hoteltype_id())) {
+            return false;
+        }
+
+        $raw_types = $this->api_hotel->get_hotel_types([
+            'hotel_type_ids' => $hotel->hoteltype_id(),
+            'languages' => $this->langauge,
+        ]);
+
+        return collect($raw_types)
+            ->map(function($type){
+                $type->translations = array_pop($type->translations);
+
+                return new Hotel_Type($type);
+            })
+            ->first();
+    }
+
+    private function get_hotel_facility_types()
     {
         if (empty($hoteltype_id)) {
             return false;
         }
 
-        $raw_types = $this->_api_hotel->get_hotel_types([
+        $raw_types = $this->api_hotel->get_hotel_types([
             'hotel_type_ids' => $hoteltype_id,
-            'languages' => $this->_language,
+            'languages' => $this->langauge,
         ]);
 
-        $language = $this->_language;
+        return collect($raw_types)
+            ->map(function($type){
+                $type->translations = array_pop($type->translations);
 
-        return array_map(function ($data) use ($language) {
-            $data->translations = array_pop($data->translations);
-
-            return new Hotel_Type($data);
-        }, $raw_types);
+                return new Hotel_Type($type);
+            })
+            ->toArray();
     }
 }
