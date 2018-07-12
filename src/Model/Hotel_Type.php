@@ -16,12 +16,12 @@ class Hotel_Type extends Base
 
     public function name()
     {
-        return $this->get_field('name');
+        return $this->_model->translations->name;
     }
 
     public function language()
     {
-        return $this->_model->language;
+        return $this->_model->translations->language;
     }
 
     public function raw_data()

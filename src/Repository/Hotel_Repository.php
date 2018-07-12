@@ -53,23 +53,22 @@ class Hotel_Repository
     {
         // first call
         $hotels = $this->_api_hotel->$endpoint($options);
-
         $offset = $this->_default_limit;
 
-        if (!isset($opitons['rows'])) :
-        // if this statement is true,
-        // it means that there are more hotels then received with the given options
-        // so make further call with the offset
-        while (is_array($hotels) && count($hotels) >= $offset) :
-        $options['offset'] = $offset;
-        $hotels_by_offset = $this->_api_hotel->$endpoint($options);
+        if (!isset($opitons['rows'])) {
+            // if this statement is true,
+            // it means that there are more hotels then received with the given options
+            // so make further call with the offset
+            while (is_array($hotels) && count($hotels) >= $offset) {
+                $options['offset'] = $offset;
+                $hotels_by_offset = $this->_api_hotel->$endpoint($options);
 
-        if (is_array($hotels_by_offset)) :
-                     $hotels = array_merge($hotels, $hotels_by_offset);
-        $offset += $this->_default_limit;
-        endif;
-        endwhile;
-        endif;
+                if (is_array($hotels_by_offset)) {
+                    $hotels = array_merge($hotels, $hotels_by_offset);
+                    $offset += $this->_default_limit;
+                }
+            }
+        }
 
         return $hotels;
     }
@@ -78,23 +77,19 @@ class Hotel_Repository
     {
         if (empty($hoteltype_id)) {
             return false;
-        } else {
-            $raw_types = $this->_api_hotel->get_hotel_types([
-                'hotel_type_ids' => $hoteltype_id,
-                'languages'      => $this->_language,
-            ]);
-
-            $obj = (array) [
-                        (object) [
-                        // 'name' =>$raw_types[0]->name,
-                        'name'     => $raw_types[0]->translations[0]->name,
-                        'language' => $raw_types[0]->translations[0]->language,
-                          ],
-                        ];
-
-            return array_map(function ($data) {
-                return new Hotel_Type($data);
-            }, $obj);
         }
+
+        $raw_types = $this->_api_hotel->get_hotel_types([
+            'hotel_type_ids' => $hoteltype_id,
+            'languages' => $this->_language,
+        ]);
+
+        $language = $this->_language;
+
+        return array_map(function ($data) use ($language){
+            $data->translations = array_pop($data->translations);
+
+            return new Hotel_Type($data);
+        }, $raw_types);
     }
 }

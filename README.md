@@ -2,6 +2,7 @@
 
 [![Version](https://img.shields.io/badge/version-v0.0.2-brightgreen.svg?style=ffor-the-badge)][current_version]
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=ffor-the-badge)](LICENSE.md)
+[![StyleCI](https://github.styleci.io/repos/139140774/shield?branch=master)](https://github.styleci.io/repos/139140774)
 
 Developer SDK for interacting with the Booking.com API
 

@@ -11,8 +11,9 @@ use Towa\SDK\Bookingcom\Repository\Hotel_Repository;
 class HotelRepositoryTest extends TestCase
 {
     /** @var \Towa\SDK\Bookingcom\Repository\Hotel_Repository */
-    /** @var \Towa\SDK\Bookingcom\Repository\Facility_Repository */
     protected $hotelRepo;
+
+    /** @var \Towa\SDK\Bookingcom\Repository\Facility_Repository */
     protected $facilityRepo;
 
     public function setUp()
@@ -137,7 +138,6 @@ class HotelRepositoryTest extends TestCase
     {
         $facilities = $this->facilityRepo->get_facility_types([]);
 
-        $facility = $facilities;
-        $this->assertNotEmpty($facility);
+        $this->assertNotEmpty($facilities);
     }
 }
