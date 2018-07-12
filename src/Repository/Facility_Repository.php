@@ -19,7 +19,7 @@ class Facility_Repository
         $raw_types = $this->api->get_facility_types($options);
 
         return collect($raw_types)
-            ->map(function($type){
+            ->map(function ($type) {
                 $type->translations = array_pop($type->translations);
 
                 return new Facility_Type($type);
