@@ -1,6 +1,6 @@
 # Changelog
 
-## [unreleased]
+## [v1.0.0]
 
 ### Added
 
@@ -25,12 +25,6 @@
 + Facility model and repo 
 + add Last changes endpoint
 
-## [v0.0.1]
-
-### Added
-
-+ v2 alpha
-
+[v1.0.0]: https://github.com/towa-digital/booking-com-sdk/releases/tag/v1.0.0
 [v0.0.2]: https://github.com/towa-digital/booking-com-sdk/releases/tag/v0.0.2
-[v0.0.1]: https://github.com/towa-digital/booking-com-sdk/releases/tag/v0.0.1
 [unreleased]: https://github.com/towa-digital/booking-com-sdk/tree/develop
