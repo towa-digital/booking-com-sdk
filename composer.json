@@ -17,7 +17,6 @@
         "vlucas/phpdotenv": "^2.4",
         "tightenco/collect": "^5.6"
     },
-    "repositories": [],
     "require-dev": {
         "symfony/var-dumper": "@stable",
         "phpunit/phpunit": "^7.2",

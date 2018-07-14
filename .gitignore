@@ -3,7 +3,6 @@
 !.gitignore
 !CHANGELOG.md
 !composer.json
-!composer.lock
 !phpunit-printer.yml
 !phpunit.xml.dist
 !LICENSE.md
