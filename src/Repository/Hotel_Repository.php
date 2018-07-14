@@ -5,7 +5,6 @@ namespace Towa\SDK\Bookingcom\Repository;
 use Towa\SDK\Bookingcom\Api\API_Hotel;
 use Towa\SDK\Bookingcom\Model\Hotel as Model_Hotel;
 use Towa\SDK\Bookingcom\Model\Hotel_Facility_Type;
-use Towa\SDK\Bookingcom\Model\Hotel_Facility_Type;
 use Towa\SDK\Bookingcom\Model\Hotel_Type;
 
 class Hotel_Repository
