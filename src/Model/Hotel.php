@@ -202,6 +202,18 @@ class Hotel extends Base
             ->toArray();
     }
 
+    public function offsiteFacilities()
+    {
+        return collect($this->get_field('hotel_data')->hotel_facilities)
+            ->filter(function($facility) {
+                $attributes = collect($facility->attrs);
+
+                return $attributes->isNotEmpty() && $attributes->contains('offsite');
+            })
+            ->mapInto(Hotel_Facility_Type::class)
+            ->toArray();
+    }
+
     public function hotel_changed_id()
     {
         return collect($this->get_field('changed_hotels'))
